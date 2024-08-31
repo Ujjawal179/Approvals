@@ -65,12 +65,11 @@ export function App() {
               return
             }
 
-            if(newValue.firstName === "All" && newValue.lastName === "Employees") {
+            else if(newValue.firstName === "All" && newValue.lastName === "Employees") {
               await loadAllTransactions()
-              return
             }
 
-            await loadTransactionsByEmployee(newValue.id)
+            else await loadTransactionsByEmployee(newValue.id)
           }}
         />
 
@@ -82,7 +81,7 @@ export function App() {
           {transactions !== null && (
             <button
               className="RampButton"
-              disabled={paginatedTransactionsUtils.loading}
+              disabled={paginatedTransactionsUtils.loading || paginatedTransactions === null || paginatedTransactions?.nextPage === null}
               onClick={async () => {
                 await loadAllTransactions()
               }}
